@@ -1,9 +1,9 @@
-const GITHUB_API_URL = "https://api.github.com";
-const token = import.meta.env.VITE_GH_ACCESS_TOKEN;
+const GITHUB_API_URL = "https://allegra-next.allegra-cloud.com";
+const token = import.meta.env.VITE_ALLEGRA_ACCESS_TOKEN;
 
 const headers = new Headers({
-  Authorization: `token ${token}`,
-  Accept: "application/vnd.github.v3+json",
+  Authorization: `${token}`,
+  Accept: "application/json",
 });
 
 /**
@@ -18,7 +18,7 @@ const headers = new Headers({
 export const fetchGitHubProjects = async (username: string, repo: string) => {
   try {
     const gitHubProjects = await fetch(
-      `${GITHUB_API_URL}/repos/${username}/${repo}/projects`,
+      `${GITHUB_API_URL}/v1/workspaces`,
       {
         method: "GET",
         headers: headers,
@@ -27,10 +27,10 @@ export const fetchGitHubProjects = async (username: string, repo: string) => {
 
     const result = await gitHubProjects.json();
 
-    return result.map((project: any) => {
+    return result.projects.map((project: any) => {
       return {
         name: project.name,
-        body: project.body,
+        body: project.descpription,
         id: project.id,
       };
     });
