@@ -2,8 +2,10 @@ const GITHUB_API_URL = "https://allegra-next.allegra-cloud.com";
 const token = import.meta.env.VITE_ALLEGRA_ACCESS_TOKEN;
 
 const headers = new Headers({
+  mode: "cors",
   Authorization: `${token}`,
   Accept: "application/json",
+  'access-control-allow-origin': '*'
 });
 
 /**
