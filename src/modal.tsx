@@ -108,28 +108,28 @@ function Modal() {
   // Fetch Allegra Items
   React.useEffect(() => {
     const getAllegraItems = async () => {
-      try {
-        let allegraItems = await fetchAllegraItems(selectedProject.id);
-        console.log("xxx", allegraItems);
-        if(allegraItems?.items === undefined) {
-          allegraItems = [];
-        }
-        allegraItems = allegraItems.items.map((item: any) => {
-          console.log(item);
-          return {
-            id: item.id,
-            title: item.fieldValues.fSynopsis,
-            created_at: item.fieldValues.fCreateDate_Raw,
-            state: item.fieldValues.fStatus,
-            url: item.fieldValues.fSynopsis,
-          };
-        });
-        console.log("aksdlöakd", allegraItems);
-        setAllegraItems([...allegraItems.items]);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
+
+      let allegraItems = await fetchAllegraItems(selectedProject.id);
+      console.log("xxx", allegraItems);
+      if (allegraItems?.items === undefined) {
+        allegraItems = [];
       }
+      allegraItems = allegraItems.items.map((item: any) => {
+        console.log(item);
+        return {
+          id: item.id,
+          title: item.fieldValues.fSynopsis,
+          created_at: item.fieldValues.fCreateDate_Raw,
+          state: item.fieldValues.fStatus,
+          url: item.fieldValues.fSynopsis,
+        };
+      });
+      console.log("aksdlöakd", allegraItems);
+      setAllegraItems([...allegraItems.items]);
+      setLoading(false);
+
+      console.error(error);
+
     };
     getAllegraItems();
   }, [selectedProject]);
