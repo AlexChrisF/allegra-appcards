@@ -194,7 +194,10 @@ export const fetchAllegraItems = async (projectID: number) => {
       `${GITHUB_API_URL}v1/items/executeCustomQuery`,
       {
         method: "POST",
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
         body: JSON.stringify({
           selectedProjects: [projectID],
         }),        
