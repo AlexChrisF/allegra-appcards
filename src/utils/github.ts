@@ -187,7 +187,7 @@ export const fetchGitHubIssues = async (username: string, repo: string) => {
  * Fetches a list of issues in a repository
  *
  */
-export const fetchAllegraItems = async (projectID: string) => {
+export const fetchAllegraItems = async (projectID: number) => {
   console.log("FetchAllegraItems", projectID);
   try {
     const gitHubProjectCards = await fetch(

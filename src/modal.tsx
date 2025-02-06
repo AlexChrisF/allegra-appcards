@@ -109,7 +109,7 @@ function Modal() {
   React.useEffect(() => {
     const getAllegraItems = async () => {
       try {
-        const allegraItems = await fetchAllegraItems(selectedProject);
+        const allegraItems = await fetchAllegraItems(selectedProject.id);
         setAllegraItems([...allegraItems]);
         setLoading(false);
       } catch (error) {
