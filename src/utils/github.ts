@@ -5,7 +5,6 @@ const headers = new Headers({
   mode: "cors",
   Authorization: `${token}`,
   Accept: "application/json",
-  'access-control-allow-origin': '*'
 });
 
 /**
