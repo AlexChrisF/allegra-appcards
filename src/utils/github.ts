@@ -7,6 +7,13 @@ const headers = new Headers({
   Accept: "application/json",
 });
 
+const postHeaders = new Headers({
+  mode: "cors",
+  Authorization: `${token}`,
+  Accept: "application/json",
+  "Content-Type": "application/json",
+});
+
 /**
  * Fetches a list of projects under a specific username and repository
  *
@@ -196,12 +203,7 @@ export const fetchAllegraItems = async (projectID: number) => {
       `${GITHUB_API_URL}v1/items/executeCustomQuery`,
       {
         method: "POST",
-        headers: new Headers ({
-          mode: "cors",
-          Authorization: `${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        }),
+        headers: postHeaders,
         body: JSON.stringify({
           selectedProjects: [projectID],
         }),        
