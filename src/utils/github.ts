@@ -19,7 +19,7 @@ const headers = new Headers({
 export const fetchGitHubProjects = async (username: string, repo: string) => {
   try {
     const gitHubProjects = await fetch(
-      `${GITHUB_API_URL}/v1/workspaces`,
+      `${GITHUB_API_URL}v1/workspaces`,
       {
         method: "GET",
         headers: headers,
@@ -52,7 +52,7 @@ export const fetchGitHubProjects = async (username: string, repo: string) => {
 export const fetchAllegraProjects = async () => {
   try {
     const gitHubProjects = await fetch(
-      `${GITHUB_API_URL}/v1/workspaces`,
+      `${GITHUB_API_URL}v1/workspaces`,
       {
         method: "GET",
         headers: headers,
@@ -191,7 +191,7 @@ export const fetchAllegraItems = async (projectID: number) => {
   console.log("FetchAllegraItems", projectID);
   try {
     const allegraItems = await fetch(
-      `${GITHUB_API_URL}/v1/items/executeCustomQuery`,
+      `${GITHUB_API_URL}v1/items/executeCustomQuery`,
       {
         method: "POST",
         headers: headers,
