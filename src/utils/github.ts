@@ -1,4 +1,4 @@
-const GITHUB_API_URL = "https://allegra-next.allegra-cloud.com";
+const GITHUB_API_URL = "https://next.allegra-cloud.com/rest/";
 const token = import.meta.env.VITE_ALLEGRA_ACCESS_TOKEN;
 
 const headers = new Headers({
