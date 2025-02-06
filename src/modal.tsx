@@ -110,13 +110,12 @@ function Modal() {
     const getAllegraItems = async () => {
       try {
         const allegraItems = await fetchAllegraItems(selectedProject.id);
-        setAllegraItems([...allegraItems]);
+        setAllegraItems([...allegraItems.items]);
         setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
-
     getAllegraItems();
   }, [selectedProject]);
 

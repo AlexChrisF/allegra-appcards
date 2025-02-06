@@ -190,15 +190,18 @@ export const fetchGitHubIssues = async (username: string, repo: string) => {
 export const fetchAllegraItems = async (projectID: number) => {
   console.log("FetchAllegraItems", projectID);
   try {
-    const gitHubProjectCards = await fetch(
-      `${GITHUB_API_URL}/repos/${username}/${repo}/issues`,
+    const allegraItems = await fetch(
+      `${GITHUB_API_URL}/v1/items/executeCustomQuery`,
       {
         method: "POST",
         headers: headers,
+        body: JSON.stringify({
+          selectedProjects: `${projectID}`,
+        }),
       },
     );
 
-    return await gitHubProjectCards.json();
+    return await allegraItems.json();
   } catch (error) {
     console.error(error);
   }
