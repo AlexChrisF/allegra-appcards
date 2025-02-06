@@ -109,7 +109,16 @@ function Modal() {
   React.useEffect(() => {
     const getAllegraItems = async () => {
       try {
-        const allegraItems = await fetchAllegraItems(selectedProject.id);
+        let allegraItems = await fetchAllegraItems(selectedProject.id);
+        allegraItems = allegraItems.items.map((item: any) => {
+          return {
+            id: item.id,
+            title: item.fSynopsis,
+            created_at: item.fCreateDate_Raw,
+            state: item.fStatus,
+            url: item.fSynopsis,
+          };
+        });
         setAllegraItems([...allegraItems.items]);
         setLoading(false);
       } catch (error) {
@@ -244,7 +253,7 @@ function Modal() {
           </div>
         ) : (
           <>
-            {filterGitHubIssues().map((issue, index) => (
+            {allegraItems.map((issue, index) => (
               <GitHubIssueRow
                 title={issue.title}
                 date={issue.created_at}
