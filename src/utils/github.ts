@@ -189,6 +189,8 @@ export const fetchGitHubIssues = async (username: string, repo: string) => {
  */
 export const fetchAllegraItems = async (projectID: number) => {
   console.log("FetchAllegraItems", projectID);
+
+  console.log(headers);
   try {
     const allegraItems = await fetch(
       `${GITHUB_API_URL}v1/items/executeCustomQuery`,
