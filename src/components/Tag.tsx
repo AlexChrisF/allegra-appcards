@@ -4,12 +4,12 @@ const Tag = ({
   status,
   color,
 }: {
-  status: { name: string; id: any };
+  status: string;
   color: string;
 }) => {
   return (
     <div className="tag-container" style={{ backgroundColor: color }}>
-      <p>{status.name}</p>
+      <p>{status}</p>
     </div>
   );
 };
