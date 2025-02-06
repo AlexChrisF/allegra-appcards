@@ -99,6 +99,9 @@ export const insertGitHubAppCards = async (gitHubIssues: any[]) => {
 
 // Inserts App Card chosen from GitHub
 export const insertAllegraAppCards = async (allegraItems: any[]) => {
+
+  console.log("Insert App Cards", allegraItems);
+
   await Promise.all(
     allegraItems.map(async (item, index) => {
       //  Get current Miro board
