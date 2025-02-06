@@ -21,14 +21,14 @@ const GitHubIssueRow = ({
 
   const [color, setColor] = React.useState("#C3C4C3");
 
-  React.useEffect(() => {
-    async function generateStatusColor() {
-      const color = await getStatusColor(status.name);
-      setColor(color);
-    }
+  // React.useEffect(() => {
+  //   async function generateStatusColor() {
+  //     const color = await getStatusColor(status.name);
+  //     setColor(color);
+  //   }
 
-    generateStatusColor();
-  });
+  //   generateStatusColor();
+  // });
 
   return (
     <>
