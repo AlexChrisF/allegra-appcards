@@ -4,6 +4,12 @@ export interface GitHubProject {
   id: number;
 }
 
+export interface AllegraProject {
+  name: string;
+  body: string;
+  id: number;
+}
+
 export interface GitHubColumns {
   name: string;
   id: number;

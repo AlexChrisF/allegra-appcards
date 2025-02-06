@@ -8,6 +8,7 @@ import {
 } from "./components";
 import {
   fetchGitHubProjects,
+  fetchAllegraProjects,
   fetchGitHubColumns,
   fetchGitHubProjectCards,
   fetchGitHubIssues,
@@ -15,6 +16,7 @@ import {
 } from "./utils";
 import type {
   GitHubProject,
+  AllegraProject,
   GitHubColumns,
   GitHubProjectCard,
   GitHubIssue,
@@ -35,6 +37,10 @@ function Modal() {
   const [gitHubProjects, setGitHubProjects] = React.useState<GitHubProject[]>(
     [],
   );
+  const [allegraProjects, setAllegraProjects] = React.useState<AllegraProject[]>(
+    [],
+  );
+
   const [gitHubColumns, setGitHubColumns] = React.useState<GitHubColumns[]>([]);
   const [gitHubProjectCards, setGitHubProjectCards] = React.useState<
     GitHubProjectCard[]
@@ -50,7 +56,7 @@ function Modal() {
     id: 0,
   });
 
-  // Fetch  GitHub Projects
+  // Fetch  GitHub Projects DONE 
   React.useEffect(() => {
     const getGitHubProjects = async () => {
       try {
@@ -65,26 +71,51 @@ function Modal() {
     getGitHubProjects();
   }, []);
 
-  // Fetch GitHub Columns
+  // Fetch  Allehra Projects DONE 
   React.useEffect(() => {
-    const getGitHubColumns = async () => {
-      if (gitHubProjects.length > 0) {
-        try {
-          const gitHubColumns = await fetchGitHubColumns(
-            gitHubProjects
-              .filter((project) => project.id !== selectedProject.id)[0]
-              .id.toString(),
-          );
+    const getAllegraProjects = async () => {
+      try {
+        const allegraProjects = await fetchAllegraProjects();
+        setAllegraProjects([...allegraProjects]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getAllegraProjects();
+  }, []);
 
-          setGitHubColumns([...gitHubColumns]);
-        } catch (error) {
-          console.error(error);
-        }
+
+  // Fetch  GitHub Projects DONE 
+  React.useEffect(() => {
+    const getGitHubProjects = async () => {
+      try {
+        const gitHubProjects = await fetchGitHubProjects(username, repo);
+
+        setGitHubProjects([...gitHubProjects]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getGitHubProjects();
+  }, []);
+
+  // Fetch GitHub Issues
+  React.useEffect(() => {
+    const getGitHubIssues = async () => {
+      try {
+        const gitHubIssues = await fetchGitHubIssues(username, repo);
+        setGitHubIssues([...gitHubIssues]);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
       }
     };
 
-    getGitHubColumns();
+    getGitHubIssues();
   }, [gitHubProjects]);
+
+
+
 
   // Fetch GitHub Cards
   React.useEffect(() => {
@@ -192,11 +223,11 @@ function Modal() {
 
   return (
     <div className="modal-container wrapper">
-      <h2>Choose from GitHub</h2>
+      <h2>Choose from Allegra</h2>
       <Select
-        label="Select GitHub Project"
+        label="Select Allegra Project"
         required={true}
-        options={gitHubProjects}
+        options={allegraProjects}
         onChange={(e) => setSelectedProject(JSON.parse(e.target.value))}
       />
       <div className="modal-grid">

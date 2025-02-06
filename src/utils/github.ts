@@ -41,6 +41,41 @@ export const fetchGitHubProjects = async (username: string, repo: string) => {
 };
 
 /**
+ * Fetches a list of projects under a specific username and repository
+ *
+ * Returns {
+ *  name: string
+ *  body: string
+ *  id: number
+ * }
+ */
+export const fetchAllegraProjects = async () => {
+  try {
+    const gitHubProjects = await fetch(
+      `${GITHUB_API_URL}/v1/workspaces`,
+      {
+        method: "GET",
+        headers: headers,
+      },
+    );
+
+    const result = await gitHubProjects.json();
+
+    return result.projects.map((project: any) => {
+      return {
+        name: project.name,
+        body: project.descpription,
+        id: project.id,
+      };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+/**
  * Fetches a list of columns under a specific project id
  *
  */
@@ -132,11 +167,12 @@ export const fetchGitHubProjectCard = async (card_id: string) => {
  *
  */
 export const fetchGitHubIssues = async (username: string, repo: string) => {
+  console.log(repo);
   try {
     const gitHubProjectCards = await fetch(
       `${GITHUB_API_URL}/repos/${username}/${repo}/issues`,
       {
-        method: "GET",
+        method: "POST",
         headers: headers,
       },
     );
