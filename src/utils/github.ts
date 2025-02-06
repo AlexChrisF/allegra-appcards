@@ -196,8 +196,8 @@ export const fetchAllegraItems = async (projectID: number) => {
         method: "POST",
         headers: headers,
         body: JSON.stringify({
-          selectedProjects: `${projectID}`,
-        }),
+          selectedProjects: [projectID],
+        }),        
       },
     );
 
