@@ -115,10 +115,10 @@ function Modal() {
           console.log(item);
           return {
             id: item.id,
-            title: item.fSynopsis,
-            created_at: item.fCreateDate_Raw,
-            state: item.fStatus,
-            url: item.fSynopsis,
+            title: item.fieldValues.fSynopsis,
+            created_at: item.fieldValues.fCreateDate_Raw,
+            state: item.fieldValues.fStatus,
+            url: item.fieldValues.fSynopsis,
           };
         });
         console.log("aksdlöakd", allegraItems);
