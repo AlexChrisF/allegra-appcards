@@ -110,7 +110,9 @@ function Modal() {
     const getAllegraItems = async () => {
       try {
         let allegraItems = await fetchAllegraItems(selectedProject.id);
+        console.log("xxx", allegraItems);
         allegraItems = allegraItems.items.map((item: any) => {
+          console.log(item);
           return {
             id: item.id,
             title: item.fSynopsis,
@@ -119,6 +121,7 @@ function Modal() {
             url: item.fSynopsis,
           };
         });
+        console.log("aksdlöakd", allegraItems);
         setAllegraItems([...allegraItems.items]);
         setLoading(false);
       } catch (error) {
