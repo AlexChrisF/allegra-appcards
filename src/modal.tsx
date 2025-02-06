@@ -111,6 +111,9 @@ function Modal() {
       try {
         let allegraItems = await fetchAllegraItems(selectedProject.id);
         console.log("xxx", allegraItems);
+        if(allegraItems?.items === undefined) {
+          allegraItems = [];
+        }
         allegraItems = allegraItems.items.map((item: any) => {
           console.log(item);
           return {
