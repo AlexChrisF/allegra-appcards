@@ -115,7 +115,7 @@ export const insertAllegraAppCards = async (allegraItems: any[]) => {
         x: index * 350,
         y: 0,
         title: item.title,
-        description: item.body,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         style: {
           cardTheme: "#fefefe",
         },
