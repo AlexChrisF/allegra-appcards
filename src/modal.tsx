@@ -12,6 +12,7 @@ import {
   fetchGitHubColumns,
   fetchGitHubProjectCards,
   fetchGitHubIssues,
+  fetchAllegraItems,
   insertGitHubAppCards,
 } from "./utils";
 import type {
@@ -20,6 +21,7 @@ import type {
   GitHubColumns,
   GitHubProjectCard,
   GitHubIssue,
+  AllegraItem,
 } from "./types";
 import { username, repo } from "./constants";
 
@@ -47,6 +49,8 @@ function Modal() {
   >([]);
   const [gitHubIssues, setGitHubIssues] = React.useState<GitHubIssue[]>([]);
 
+  const [allegraItems, setAllegraItems] = React.useState<AllegraItem[]>([]);
+
   /**
    * Store selection options
    */
@@ -56,7 +60,7 @@ function Modal() {
     id: 0,
   });
 
-  // Fetch  GitHub Projects DONE 
+  // Fetch  GitHub Projects 
   React.useEffect(() => {
     const getGitHubProjects = async () => {
       try {
@@ -71,7 +75,7 @@ function Modal() {
     getGitHubProjects();
   }, []);
 
-  // Fetch  Allehra Projects DONE 
+  // Fetch  Allegra Projects DONE 
   React.useEffect(() => {
     const getAllegraProjects = async () => {
       try {
@@ -84,20 +88,6 @@ function Modal() {
     getAllegraProjects();
   }, []);
 
-
-  // Fetch  GitHub Projects DONE 
-  React.useEffect(() => {
-    const getGitHubProjects = async () => {
-      try {
-        const gitHubProjects = await fetchGitHubProjects(username, repo);
-
-        setGitHubProjects([...gitHubProjects]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getGitHubProjects();
-  }, []);
 
   // Fetch GitHub Issues
   React.useEffect(() => {
@@ -113,6 +103,22 @@ function Modal() {
 
     getGitHubIssues();
   }, [gitHubProjects]);
+
+
+  // Fetch Allegra Items
+  React.useEffect(() => {
+    const getAllegraItems = async () => {
+      try {
+        const allegraItems = await fetchAllegraItems(selectedProject);
+        setAllegraItems([...allegraItems]);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getAllegraItems();
+  }, [selectedProject]);
 
 
 

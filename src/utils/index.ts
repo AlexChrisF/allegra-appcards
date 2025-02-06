@@ -5,6 +5,7 @@ export {
   fetchGitHubColumn,
   fetchGitHubProjectCards,
   fetchGitHubIssues,
+  fetchAllegraItems,
   fetchGitHubProjectCard,
   fetchGitHubCollaborators,
   createGitHubIssue,

@@ -184,6 +184,29 @@ export const fetchGitHubIssues = async (username: string, repo: string) => {
 };
 
 /**
+ * Fetches a list of issues in a repository
+ *
+ */
+export const fetchAllegraItems = async (projectID: string) => {
+  console.log("FetchAllegraItems", projectID);
+  try {
+    const gitHubProjectCards = await fetch(
+      `${GITHUB_API_URL}/repos/${username}/${repo}/issues`,
+      {
+        method: "POST",
+        headers: headers,
+      },
+    );
+
+    return await gitHubProjectCards.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+/**
  * Fetches a list of collaborators in a project
  *
  */

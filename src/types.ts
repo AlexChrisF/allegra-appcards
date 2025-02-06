@@ -28,3 +28,11 @@ export interface GitHubIssue {
   state: string;
   url: string;
 }
+
+export interface AllegraItem {
+  id: number;
+  title: string;
+  created_at: string;
+  state: string;
+  url: string;
+}
