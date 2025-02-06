@@ -14,6 +14,7 @@ import {
   fetchGitHubIssues,
   fetchAllegraItems,
   insertGitHubAppCards,
+  insertAllegraAppCards,
 } from "./utils";
 import type {
   GitHubProject,
@@ -236,13 +237,13 @@ function Modal() {
 
   // Handle importing and converting GitHub issues to App Cards
   const handleImportClick = async () => {
-    // try {
-    //   await insertGitHubAppCards(selectedGitHubIssues);
+    try {
+      await insertAllegraAppCards(selectedAllegraItems);
 
-    //   await miro.board.ui.closeModal();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      await miro.board.ui.closeModal();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

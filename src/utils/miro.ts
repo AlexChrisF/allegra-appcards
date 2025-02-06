@@ -95,3 +95,54 @@ export const insertGitHubAppCards = async (gitHubIssues: any[]) => {
     }),
   );
 };
+
+
+// Inserts App Card chosen from GitHub
+export const insertAllegraAppCards = async (allegraItems: any[]) => {
+  await Promise.all(
+    allegraItems.map(async (item, index) => {
+      //  Get current Miro board
+      const { id } = await miro.board.getInfo();
+
+      // // Get issue status color
+      // const color = await getStatusColor(item.status.name);
+
+      // Create App Card
+      const appCard = await miro.board.createAppCard({
+        x: index * 350,
+        y: 0,
+        title: item.title,
+        description: item.body,
+        style: {
+          cardTheme: "#fefefe",
+        },
+        fields: [
+          {
+            value: item.status,
+            iconShape: "square",
+            fillColor: "#eeeeee",
+            textColor: "#ffffff",
+          },
+        ],
+        status: "connected",
+      });
+
+      // Post data to supabase
+      await supabase.from("card-mapping").insert([
+        {
+          miroAppCardId: appCard.id,
+          allegraItemNumber: item.id,
+          miroUserId: appCard.createdBy,
+          // allegraUsername: issue.user.login,
+          miroBoardId: id,
+          allegraItemId: item.id,
+          // gitHubProjectCardId: issue.gitHubProjectCard.id,
+        },
+      ]);
+
+      if (index === 0) {
+        await miro.board.viewport.zoomTo(appCard);
+      }
+    }),
+  );
+};

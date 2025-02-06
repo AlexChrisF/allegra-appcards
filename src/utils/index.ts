@@ -18,6 +18,7 @@ export {
   insertAppCards,
   removeSelectedItem,
   insertGitHubAppCards,
+  insertAllegraAppCards,
 } from "./miro";
 
 export { supabase } from "./supabase";
