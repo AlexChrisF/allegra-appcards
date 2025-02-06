@@ -33,6 +33,10 @@ function Modal() {
     GitHubIssue[]
   >([]);
 
+  const [selectedAllegraItems, setSelectedAllegraItems] = React.useState<
+  AllegraItem[]
+>([]);
+
   /**
    * Store information pulled from GitHub API
    */
@@ -218,27 +222,27 @@ function Modal() {
   };
 
   // Handle when a GitHubIssueRow is selected or not
-  const handleGitHubIssueSelect = (isChecked: boolean, issue: GitHubIssue) => {
+  const handleAllegraItemSelect = (isChecked: boolean, item: AllegraItem) => {
     //  Set ore remove issue into selected state
     if (isChecked) {
-      setSelectedGitHubIssues((previousState) => [...previousState, issue]);
+      setSelectedAllegraItems((previousState) => [...previousState, item]);
     } else {
-      const updatedGitHubIssues = selectedGitHubIssues.filter(
-        (currentIssue) => currentIssue.id !== issue.id,
+      const updatedAllegraItems = selectedGitHubIssues.filter(
+        (currentItem) => currentItem.id !== item.id,
       );
-      setSelectedGitHubIssues([...updatedGitHubIssues]);
+      setSelectedGitHubIssues([...updatedAllegraItems]);
     }
   };
 
   // Handle importing and converting GitHub issues to App Cards
   const handleImportClick = async () => {
-    try {
-      await insertGitHubAppCards(selectedGitHubIssues);
+    // try {
+    //   await insertGitHubAppCards(selectedGitHubIssues);
 
-      await miro.board.ui.closeModal();
-    } catch (error) {
-      console.error(error);
-    }
+    //   await miro.board.ui.closeModal();
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
@@ -259,12 +263,12 @@ function Modal() {
           </div>
         ) : (
           <>
-            {allegraItems.map((issue, index) => (
+            {allegraItems.map((item, index) => (
               <GitHubIssueRow
-                title={issue.title}
-                date={issue.created_at}
-                status={issue.status}
-                onSelect={(value) => handleGitHubIssueSelect(value, issue)}
+                title={item.title}
+                date={item.created_at}
+                status={item.status}
+                onSelect={(value) => handleAllegraItemSelect(value, item)}
                 key={index}
               />
             ))}
@@ -275,7 +279,7 @@ function Modal() {
         className="button button-primary"
         type="button"
         onClick={handleImportClick}
-        disabled={selectedGitHubIssues.length === 0}
+        disabled={selectedAllegraItems.length === 0}
       >
         Import
       </button>
